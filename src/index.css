@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-primary: #1B6B4A;
+  --color-primary-light: #E8F5EE;
+
+  /* Accent / Status */
+  --color-accent: #E5A100;
+  --color-danger: #DC2626;
+  --color-success: #16A34A;
+
+  /* Confidence */
+  --color-confidence-high: #16A34A;
+  --color-confidence-medium: #E5A100;
+  --color-confidence-low: #DC2626;
+
+  /* Neutrals */
+  --color-neutral-900: #1A1A2E;
+  --color-neutral-100: #F5F5F7;
+  --color-surface: #FFFFFF;
+
+  /* Font */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Ensure minimum 16px body text on tablet */
+html {
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-neutral-900);
+  background-color: var(--color-neutral-100);
+  overscroll-behavior: none;
+}
+
+/* Tabular numbers for data alignment */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* === TAP FEEDBACK === */
+.tap-feedback {
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+.tap-feedback:active {
+  transform: scale(0.96);
+}
+
+/* Card-specific: darken on press */
+.tap-card:active {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Nav icon tap */
+.tap-nav:active .nav-icon {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+/* Stepper button tap */
+.tap-stepper:active {
+  transform: scale(0.92);
+}
+
+/* === SLIDE-UP PANEL === */
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.2s ease-out;
+}
+
+/* === TOAST === */
+@keyframes toast-in {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+@keyframes toast-out {
+  from { transform: translate(-50%, 0); opacity: 1; }
+  to { transform: translate(-50%, 20px); opacity: 0; }
+}
+.toast-enter {
+  animation: toast-in 0.2s ease-out forwards;
+}
+.toast-exit {
+  animation: toast-out 0.2s ease-in forwards;
+}
+
+/* === PAGE TRANSITIONS === */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-in-left {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.page-fade {
+  animation: fade-in 0.15s ease-out;
+}
+.page-slide-right {
+  animation: slide-in-right 0.18s ease-out;
+}
+.page-slide-left {
+  animation: slide-in-left 0.18s ease-out;
+}
+
+/* === STAGGER CHILDREN (for loading→content) === */
+@keyframes stagger-in {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.stagger-container > * {
+  animation: stagger-in 0.25s ease-out both;
+}
+.stagger-container > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-container > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-container > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-container > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-container > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-container > *:nth-child(6) { animation-delay: 250ms; }
+.stagger-container > *:nth-child(7) { animation-delay: 300ms; }
+.stagger-container > *:nth-child(8) { animation-delay: 350ms; }
+
+/* === TRAY COUNTER NUMBER ANIMATION === */
+@keyframes count-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.count-pop {
+  animation: count-pop 0.2s ease-out;
+}
+
+/* === CHECKBOX DRAW === */
+@keyframes check-draw {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+.check-draw {
+  stroke-dasharray: 24;
+  animation: check-draw 0.25s ease-out forwards;
+}
+
+/* === ROW FLASH (prep item completion) === */
+@keyframes row-flash {
+  0% { background-color: transparent; }
+  30% { background-color: rgba(22, 163, 74, 0.08); }
+  100% { background-color: transparent; }
+}
+.row-flash {
+  animation: row-flash 0.5s ease-out;
+}
+
+/* === FORM FLASH (waste saved) === */
+@keyframes form-flash {
+  0% { box-shadow: none; }
+  30% { box-shadow: inset 0 0 0 2px rgba(22, 163, 74, 0.3); }
+  100% { box-shadow: none; }
+}
+.form-flash {
+  animation: form-flash 0.5s ease-out;
+}
+
+/* === PULL TO REFRESH === */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.refresh-spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* === FORM INPUT === */
+.input-field {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(26, 26, 46, 0.1);
+  font-size: 16px;
+  color: var(--color-neutral-900);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input-field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(27, 107, 74, 0.15);
+}
+
+/* === SAFE AREA (iPad / notch devices) === */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
